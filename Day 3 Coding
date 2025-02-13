@@ -1,0 +1,95 @@
+int main() {
+ Brain.Screen.setFillColor(red);
+ Brain.Screen.setFont(mono40);
+ //Brain.Screen.drawRectangle(0, 0, 479, 239);
+
+
+ int score1 = 1;
+ int score2 = 1;
+ bool gamestart = false;
+ bool questionstart1 = false;
+ bool questionstart2 = false;
+ double blinktime = 0;
+ while(1==1){
+ if(BumperA.pressing() && PotentiometerB.angle(percent) > 25 && PotentiometerB.angle(percent) <= 50){
+   score1 = 0;
+   score2 = 0;
+   Brain.Screen.setCursor(3, 1);
+   Brain.Screen.print(score1);
+   Brain.Screen.setCursor(3, 23);
+   Brain.Screen.print(score2);
+   gamestart = true;
+ }
+if (gamestart == true && BumperA.pressing() && PotentiometerB.angle(percent) > 0 && PotentiometerB.angle(percent) <= 25){
+ questionstart1 = true;
+ questionstart2 = true;
+}
+if(BumperA.pressing() && PotentiometerB.angle(percent) > 50 && PotentiometerB.angle(percent) <= 75){
+  score1 += 1;
+  Brain.Screen.setCursor(3, 1);
+  Brain.Screen.print(score1);
+  Brain.Screen.setCursor(3, 23);
+  Brain.Screen.print(score2);
+  wait(1,seconds);
+}
+if(BumperA.pressing() && PotentiometerB.angle(percent) > 75 && PotentiometerB.angle(percent) <= 100){
+  score2 += 1;
+  Brain.Screen.setCursor(3, 1);
+  Brain.Screen.print(score1);
+  Brain.Screen.setCursor(3, 23);
+  Brain.Screen.print(score2);
+  wait(1, seconds);
+}
+if(questionstart1 == true && BumperC.pressing()){
+ questionstart1 = false;
+ questionstart2 = false;
+ blinktime = 1;  
+for (int i = 1; i <= 14; i++) {
+   LEDE.on();
+   //Brain.Screen.drawRectangle(0, 0, 479, 239);
+   Brain.Screen.setCursor(3,7);
+   Brain.Screen.print("Answer Now");
+    wait(0.0393, seconds);
+    LEDE.off();
+   Brain.Screen.clearScreen();
+    wait(blinktime, seconds);
+    blinktime = blinktime - 0.05;
+    }
+   questionstart2 = true;
+   Brain.Screen.setCursor(3, 1);
+   Brain.Screen.print(score1);
+   Brain.Screen.setCursor(3, 23);
+   Brain.Screen.print(score2);
+   Brain.Screen.setCursor(3,7);
+   Brain.Screen.print("Time's Up");
+   Brain.Screen.setCursor(4,7);
+   Brain.Screen.print("Player 2");
+}
+if(questionstart2 == true && BumperD.pressing()){
+ questionstart1 = false;
+ questionstart2 = false;
+ blinktime = 1;  
+for(int i=1; i<=14; i++){
+    LEDF.on();
+   //Brain.Screen.drawRectangle(0, 0, 479, 239);
+   Brain.Screen.setCursor(3,7);
+   Brain.Screen.print("Answer Now");
+    wait(0.0393, seconds);
+    LEDF.off();
+   Brain.Screen.clearScreen();
+    wait(blinktime, seconds);
+    blinktime = blinktime - 0.05;
+    }
+   questionstart1 = true;
+   Brain.Screen.setCursor(3, 1);
+   Brain.Screen.print(score1);
+   Brain.Screen.setCursor(3, 23);
+   Brain.Screen.print(score2);
+   Brain.Screen.setCursor(3,7);
+   Brain.Screen.print("Time's Up");
+   Brain.Screen.setCursor(4,7);
+   Brain.Screen.print("Player 1");
+}
+ }
+}
+
