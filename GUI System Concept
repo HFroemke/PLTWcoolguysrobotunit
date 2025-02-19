@@ -1,0 +1,49 @@
+
+int score1 = 1;
+ int score2 = 1;
+ bool gamestart = false;
+ bool questionstart1 = false;
+ bool questionstart2 = false;
+ double blinktime = 0;
+
+void showScore() {
+Brain.Screen.setFont(mono40);
+  Brain.Screen.setPenColor(black);
+  Brain.Screen.setFillColor(white);
+  Brain.Screen.setCursor(1, 1);
+   Brain.Screen.print(score1);
+   Brain.Screen.setCursor(1, 48);
+   Brain.Screen.print(score2);
+}
+
+ void gooberEvent() {
+  if(Brain.Screen.xPosition() >= 379){
+  Brain.Screen.setPenColor(red);
+  Brain.Screen.setFillColor(red);
+  Brain.Screen.drawRectangle(379, 0, 100, 239); 
+  wait(1, seconds);
+
+
+  Brain.Screen.setPenColor(blue);
+  Brain.Screen.setFillColor(blue);
+  Brain.Screen.drawRectangle(379, 0, 100, 239); 
+showScore();
+  }
+  }
+
+int main() {
+   
+
+  Brain.Screen.setPenColor(red);
+  Brain.Screen.setFillColor(red);
+  Brain.Screen.drawRectangle(0, 0, 100, 239);
+
+  Brain.Screen.setPenColor(blue);
+  Brain.Screen.setFillColor(blue);
+  Brain.Screen.drawRectangle(379, 0, 100, 239); 
+  
+  showScore();
+  
+  Brain.Screen.pressed(gooberEvent);
+ while(true) {
+   wait(0.000005, seconds);
